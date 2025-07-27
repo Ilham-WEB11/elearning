@@ -1,0 +1,684 @@
+```
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning SMA Negeri 1 Garung</title>
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #1a56a7;
+            --secondary: #f8f9fa;
+            --accent: #28a745;
+            --text: #212529;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--secondary);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(26, 86, 167, 0.8), rgba(26, 86, 167, 0.6)),
+                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/87de893c-d81e-4ce3-829c-2e71a2932c67.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Features */
+        .features {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Courses */
+        .courses {
+            padding: 4rem 2rem;
+            background-color: #f1f5f9;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .course-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .course-button:hover {
+            background-color: #15407d;
+        }
+
+        /* Stats */
+        .stats {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), #11418f);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 0 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--primary);
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -8px;
+            left: 0;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c2829c09-18d8-4617-9f6c-00e55b6b268e.png" alt="Logo SMA Negeri 1 Garung - bergambar lambang tunas kelapa dengan tulisan SMA N 1 Garung" width="80" height="80">
+            </div>
+            <div class="logo-text">
+                <h1>SMA Negeri 1 Garung Lor<h1>
+                <p>Platform E-Learning</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#courses">Mata Pelajaran</a></li>
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h2>Selamat Datang di Portal E-Learning</h2>
+            <p>Sistem pembelajaran online SMA Negeri 1 Garung Lor memudahkan siswa dan guru dalam proses belajar mengajar.</p>
+            <a href="#courses" class="cta-button">Mulai Belajar</a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2 class="section-title">Fitur Unggulan Kami</h2>
+        <div class="features-grid">
+            <div class="feature-card fade-in delay-1">
+                <div class="feature-icon">📚</div>
+                <h3>Materi Pembelajaran Lengkap</h3>
+                <p>Akses materi pelajaran, modul, dan sumber belajar lainnya untuk semua mata pelajaran di SMA.</p>
+            </div>
+            <div class="feature-card fade-in delay-2">
+                <div class="feature-icon">🎓</div>
+                <h3>Ujian Online</h3>
+                <p>Sistem ujian online dengan berbagai jenis soal dan hasil yang dapat langsung dilihat.</p>
+            </div>
+            <div class="feature-card fade-in delay-3">
+                <div class="feature-icon">👨‍🏫</div>
+                <h3>Diskusi dengan Guru</h3>
+                <p>Fitur diskusi yang memungkinkan interaksi langsung antara siswa dan guru.</p>
+            </div>
+            <div class="feature-card fade-in delay-4">
+                <div class="feature-icon">📱</div>
+                <h3>Akses di Mana Saja</h3>
+                <p>Platform yang responsive dan dapat diakses melalui komputer, tablet, maupun smartphone.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="courses" id="courses">
+        <h2 class="section-title">Mata Pelajaran</h2>
+        <div class="courses-grid">
+            <div class="course-card fade-in">
+                <div class="course-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/40403f1c-2642-4aa9-8c1d-18dc3a77d311.png" alt="Ilustrasi pelajaran Matematika dengan rumus aljabar dan geometri di papan tulis" />
+                </div>
+                <div class="course-content">
+                    <h3>Matematika</h3>
+                    <div class="course-meta">
+                        <span>12 Modul</span>
+                        <span>Kelas 10-12</span>
+                    </div>
+                    <p>Pelajari konsep matematika dari dasar hingga lanjutan dengan metode yang mudah dipahami.</p>
+                    <a href="#" class="course-button">Mulai Belajar</a>
+                </div>
+            </div>
+            <div class="course-card fade-in delay-1">
+                <div class="course-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/59dd074f-7473-4143-ac0d-7915151c2775.png" alt="Ilustrasi pelajaran Fisika dengan percobaan laboratorium dan rumus fisika" />
+                </div>
+                <div class="course-content">
+                    <h3>Fisika</h3>
+                    <div class="course-meta">
+                        <span>10 Modul</span>
+                        <span>Kelas 10-12</span>
+                    </div>
+                    <p>Eksplorasi konsep fisika melalui video, simulasi, dan eksperimen virtual.</p>
+                    <a href="#" class="course-button">Mulai Belajar</a>
+                </div>
+            </div>
+            <div class="course-card fade-in delay-2">
+                <div class="course-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d53e0dea-2f56-4193-8b1a-3d4616ed0001.png" alt="Ilustrasi pelajaran Bahasa Indonesia dengan buku sastra dan alat tulis tradisional" />
+                </div>
+                <div class="course-content">
+                    <h3>Bahasa Indonesia</h3>
+                    <div class="course-meta">
+                        <span>8 Modul</span>
+                        <span>Kelas 10-12</span>
+                    </div>
+                    <p>Tingkatkan kemampuan berbahasa dan apresiasi sastra Indonesia.</p>
+                    <a href="#" class="course-button">Mulai Belajar</a>
+                </div>
+            </div>
+            <div class="course-card fade-in delay-3">
+                <div class="course-image">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fe4eb7fc-60f5-44e8-a8de-3b37292f9341.png" alt="Ilustrasi pelajaran Bahasa Inggris dengan globe dan buku kamus Inggris-Indonesia" />
+                </div>
+                <div class="course-content">
+                    <h3>Bahasa Inggris</h3>
+                    <div class="course-meta">
+                        <span>9 Modul</span>
+                        <span>Kelas 10-12</span>
+                    </div>
+                    <p>Pelajari bahasa internasional dengan metode interaktif dan kontekstual.</p>
+                    <a href="#" class="course-button">Mulai Belajar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item fade-in">
+                <h2>500+</h2>
+                <p>Siswa Aktif</p>
+            </div>
+            <div class="stat-item fade-in delay-1">
+                <h2>40+</h2>
+                <p>Guru Pengajar</p>
+            </div>
+            <div class="stat-item fade-in delay-2">
+                <h2>15+</h2>
+                <p>Mata Pelajaran</p>
+            </div>
+            <div class="stat-item fade-in delay-3">
+                <h2>1000+</h2>
+                <p>Materi Pembelajaran</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">Apa Kata Mereka</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial fade-in">
+                <div class="testimonial-avatar">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a0cc049e-1c33-4c2c-9e90-d716852e07d4.png" alt="Foto siswa SMA Negeri 1 Garung bernama Andi, mengenakan seragam putih abu-abu dengan senyum ramah" />
+                </div>
+                <div class="testimonial-text">
+                    "Platform e-learning ini sangat membantu saya memahami materi yang sulit, terutama karena bisa diulang-ulang sampai paham."
+                </div>
+                <div class="testimonial-author">
+                    Andi, Kelas XI IPA 2
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+          <h2 class="section-title>Tentang Kami</h2>
+          <div class="about-grid">
+            </h2>
+            </section>
+
+    <footer>
+
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Tentang Kami</h3>
+                <p>SMA Negeri 1 Garung adalah salah satu sekolah menengah atas terbaik di Kabupaten Wonosobo dengan komitmen untuk memberikan pendidikan berkualitas.</p>
+                <div class="social-links">
+                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7eb0fa78-22df-4cf4-b2f7-22de62ec9fec.png" alt="Icon Facebook" width="24" height="24"></a>
+                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4b8b2d5e-4ec2-4ce4-b8c5-e4108d9fd121.png" alt="Icon Instagram" width="24" height="24"></a>
+                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f4bb02da-e424-40ea-b67e-8ca821507ed6.png" alt="Icon YouTube" width="24" height="24"></a>
+                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/82b64812-161f-4f8d-8545-d9893fb6529d.png" alt="Icon Twitter" width="24" height="24"></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Link Cepat</h3>
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#courses">Fitur<a></li>
+                    <li><a href="#features">Fitur</a></li>
+                    <li><a href="#about">Tentang Sekolah</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Kontak Kami</h3>
+                <ul>
+                    <li>Jl. Pendidikan No. 123, Garung, Wonosobo</li>
+                    <li>Email: info@sman1garung.sch.id</li>
+                    <li>Telepon: (0286) 1234567</li>
+                    <li>WhatsApp: 081234567890</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 SMA Negeri 1 Garung. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animasi scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                for (let i = 0; i < fadeElements.length; i++) {
+                    const elem = fadeElements[i];
+                    const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
+                    if (distInView < 0) {
+                        elem.style.opacity = '1';
+                        elem.style.transform = 'translateY(0)';
+                    }
+                }
+            };
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll();
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
